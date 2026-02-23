@@ -1,0 +1,36 @@
+sequenceDiagram
+participant browser
+participant server
+
+Note right of browser: Recived 304 opening HTML
+
+browser ->> server:https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server 
+server ->> browser:HTML
+deactivate server
+
+Note right of browser:  Recived HTML file
+
+browser ->> server:GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server 
+server ->> browser:CSS
+deactivate server
+
+
+Note left of server: recived 304 abrir o main css
+browser ->> server:GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server 
+server ->> browser:Java Script
+deactivate server
+
+Note left of server:data.js 200 OK Buscar dados do servidor
+browser ->> server:GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server 
+server ->> browser:JSON notas
+deactivate server
+
+Note right of browser: new_note_spa 201 Created Guarda a nota e responde com JSON
+browser ->> server:POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+activate server 
+server ->> browser:JSON 201 Created
+deactivate server
